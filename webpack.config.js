@@ -1,7 +1,7 @@
 const publicJs = './public/javascripts/';
 const config = {
     entry: [
-        publicJs + 'index.js'
+        publicJs + 'index.jsx'
     ],
     output: {
         path: __dirname,
@@ -11,9 +11,19 @@ const config = {
         extensions: ['.js', '.jsx']
     },
     module: {
-        rules: [
-            { test: /\.js|jsx$/, loader: 'babel-loader' },
-            { test: /\.less$/, loader: "less-loader" }
+        rules: [{
+                test: /\.js|jsx$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['react'],
+                    cacheDirectory: true
+                },
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.less$/,
+                loader: "less-loader"
+            }
         ]
     },
     mode: "development"
